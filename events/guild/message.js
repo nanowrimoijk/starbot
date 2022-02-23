@@ -37,6 +37,7 @@ module.exports = (Discord, client, message) => {
 
 					new_user.exp += Random(exp_range) + 1;
 					new_user.last_exp = message.createdAt.getTime();
+					new_user.name = message.author.username;
 
 					if (new_user.exp >= (new_user.level * level_increase)) {
 						console.log(new_user);
