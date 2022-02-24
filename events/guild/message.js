@@ -40,7 +40,7 @@ module.exports = (Discord, client, message) => {
 						console.log(new_user);
 						new_user.exp -= (new_user.level * level_increase);
 						new_user.level += 1;
-						client.channels.cache.get('585978730816733217').send(`${message.author.username} you are now level ${new_user.level}!`);
+						client.channels.cache.get('585978730816733217').send(`${message.author} you are now level ${new_user.level}!`);
 					}
 
 					let remainder = new_user.level % 5;
