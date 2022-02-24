@@ -10,7 +10,7 @@ module.exports = (Discord, client) => {
     // client.user.setActivity('Running - D.JS Bot Template V3 by snommi', { type: 'WATCHING' });
     // client.user.setActivity('Running - D.JS Bot Template V3 by snommi');
 
-		client.user.setPresence({ activity: { name: '% | LEVEEEEELSSSSSSS!!!!' }, status: 'online' });
+		client.user.setPresence({ activity: { name: '%help' }, status: 'online' });
 
     //client.user.setStatus('idle');
     // Possible Values: online - idle - dnd - invisible
