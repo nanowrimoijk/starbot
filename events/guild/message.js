@@ -6,9 +6,6 @@ let level_increase = 100;
 
 module.exports = (Discord, client, message) => {
 
-	//console.log(`${message} - ${message.author.username}#${message.author.discriminator}`);
-	// logs all user and bot sent messages, if you do not want this, put // before the line
-
 	let role_levels = ['Satellite', 'Meteor', 'Rising Star', 'Shooting Star', 'Nebula', 'Supernova', 'Supernova', 'Supernova'];
 
 
