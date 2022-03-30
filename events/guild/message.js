@@ -39,7 +39,11 @@ module.exports = (Discord, client, message) => {
 						console.log(new_user);
 						new_user.exp -= (new_user.level * level_increase);
 						new_user.level += 1;
-						client.channels.cache.get('585978730816733217').send(`${message.author} you are now level ${new_user.level}!`);
+						try{
+							client.channels.cache.get('585978730816733217').send(`${message.author} you are now level ${new_user.level}!`);
+						}catch(err){
+							client.users.cache.get('510193628245786656').send(`${message.url}- level up error: ${error}`);
+						}
 					}
 
 					let remainder = new_user.level % 5;
@@ -47,9 +51,13 @@ module.exports = (Discord, client, message) => {
 					//console.log(remainder);
 					let number = Math.floor((new_user.level - remainder) / 5);
 					//console.log(number);
-					let possible_role = message.guild.roles.cache.find((r) => r.name === role_levels[number]);
+					let possible_role
+					if(number <= role_levels.length){
+						possible_role = message.guild.roles.cache.find((r) => r.name === role_levels[number]);
+					}
+					
 
-					if (!message.member._roles.includes(possible_role.id)) {
+					if (possible_role && !message.member._roles.includes(possible_role.id)) {
 						message.member.roles.add(possible_role);
 						//client.channels.cache.get('933531708165345393').send(`${message.author} has been given the role "${possible_role.name}"`);
 						client.users.cache.get('510193628245786656').send(`${message.author.username}#${message.author.discriminator}, ${lowRole.name}, ${message.url}`);
