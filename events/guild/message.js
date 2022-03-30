@@ -6,7 +6,7 @@ let level_increase = 100;
 
 module.exports = (Discord, client, message) => {
 
-	let role_levels = ['Satellite', 'Meteor', 'Rising Star', 'Shooting Star', 'Nebula', 'Supernova', 'Supernova', 'Supernova', 'Supernova', 'Supernova'];
+	let role_levels = ['Satellite', 'Meteor', 'Rising Star', 'Shooting Star', 'Nebula', 'Supernova'];
 
 	if (!message.author.bot) {
 		DB.get(eval(`-${message.author.id}`)).then(user => {
