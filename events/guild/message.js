@@ -8,7 +8,7 @@ module.exports = (Discord, client, message) => {
 
 	let role_levels = ['Satellite', 'Meteor', 'Rising Star', 'Shooting Star', 'Nebula', 'Supernova'];
 
-	if (!message.author.bot) {
+	if (!message.author.bot && message.guild != null) {
 		DB.get(eval(`-${message.author.id}`)).then(user => {
 			if (user == null) {
 				let key = eval(`-${message.author.id}`);
@@ -17,8 +17,9 @@ module.exports = (Discord, client, message) => {
 					last_exp: message.createdAt.getTime(),
 					level: 1,
 					exp: Random(exp_range),
+					ticket: false,
 				}).then(() => {
-					console.log(`DB: key for user '${message.author.username}/${message.author.id}' has been added`);
+					console.log(`DB: key for user '${message.author.username}#${message.author.discriminator}(${message.author.id})' has been added`);
 				});
 			}
 			else {
@@ -39,10 +40,10 @@ module.exports = (Discord, client, message) => {
 						console.log(new_user);
 						new_user.exp -= (new_user.level * level_increase);
 						new_user.level += 1;
-						try{
+						try {
 							client.channels.cache.get('585978730816733217').send(`${message.author} you are now level ${new_user.level}!`);
-						}catch(err){
-							client.users.cache.get('510193628245786656').send(`${message.url}- level up error: ${error}`);
+						} catch (err) {
+							client.users.cache.get('510193628245786656').send(`${message.url}- level up error: ${err}`);
 						}
 					}
 
@@ -52,10 +53,10 @@ module.exports = (Discord, client, message) => {
 					let number = Math.floor((new_user.level - remainder) / 5);
 					//console.log(number);
 					let possible_role
-					if(number <= role_levels.length){
+					if (number <= role_levels.length) {
 						possible_role = message.guild.roles.cache.find((r) => r.name === role_levels[number]);
 					}
-					
+
 
 					if (possible_role && !message.member._roles.includes(possible_role.id)) {
 						message.member.roles.add(possible_role);
@@ -73,18 +74,62 @@ module.exports = (Discord, client, message) => {
 	}
 
 	const prefix = process.env.PREFIX;
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if ((!message.content.startsWith(prefix) && message.guild != null) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/g);
-	const cmd = args.shift().toLowerCase();
+	let cmd = args.shift().toLowerCase();
 
+	if (message.guild == null) {
+		DB.get(eval(`-${message.author.id}`)).then(user => {
+			console.log(user.ticket);
+			if (user != null) {
+				if (!user.ticket) {
+					let object = user;
+					user.ticket = false;
+
+					let key = eval(`-${message.author.id}`);
+					DB.set(key, object).then(() => {
+						console.log(`[MODMAIL]: user '${message.author.username}' account updated`);
+						activate_ticket(message.author.id);
+					});
+				}
+				else if (user.ticket == false) {
+					activate_ticket(message.author.id);
+				}
+				else if (user.ticket == true) {
+					//console.log(`tk-${message.author.username}-${message.author.id}`)
+					let channel = client.channels.cache.find(channel => channel.name === `tk-${message.author.username.toLowerCase()}-${message.author.id}`);
+					try{
+						channel.send(`>${message}`);
+					}catch(err) {console.log(err)}
+				}
+			}
+		});
+	}
+
+	function activate_ticket(user) {
+		DB.get(eval(`-${user}`)).then(user => {
+			let object = user;
+			user.ticket = true;
+
+			let key = eval(`-${message.author.id}`);
+			DB.set(key, object).then(() => {
+				console.log(`[MODMAIL]: user ${message.author.username} created a ticket`);
+				client.commands.get('modmail').execute(client, message, args, Discord);
+			});
+		});
+	}
+
+	//if (message.guild == null) cmd = 'modmail';
 	const command = client.commands.get(cmd);
 
 	if (!command) return;
 
-	if ((command.admin && !message.member.hasPermission('ADMINISTRATOR') && message.author.id != 510193628245786656)) {
-		//let mod_role = message.guild.roles.cache.find((r) => r.name === "Starcop (Mod)");
-		return message.channel.send(`You don't have permission to use this command, ${message.author}!`);
+	if (message.guild != null) {
+		if ((command.admin && !message.member.hasPermission('ADMINISTRATOR') && message.author.id != 510193628245786656)) {
+			//let mod_role = message.guild.roles.cache.find((r) => r.name === "Starcop (Mod)");
+			return message.channel.send(`You don't have permission to use this command, ${message.author}!`);
+		}
 	}
 
 	if (command.args && !args.length) {
