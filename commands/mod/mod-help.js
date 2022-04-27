@@ -13,7 +13,7 @@ module.exports = {
 		;
 
 		client.commands.forEach(function(command) {
-			if(!command.admin && !command.mod){
+			if(!command.admin ){
 				embed.addField(`${command.name}`, `${command.usage} => ${command.description}`);
 			}
 		});
