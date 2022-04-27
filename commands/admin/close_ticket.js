@@ -6,11 +6,11 @@ module.exports = {
 	name: "close_ticket",
 	description: "Closes the ticket the command is used inside of.",
 	usage: `${prefix}close_ticket (*TO BE USED INSIDE OF TICKET CHANNELS ONLY*)`,
-	admin: true,
+	mod: true,
 
 	execute(client, message, args, Discord) {
-		let array = message.channel.name.split('-');
-		let id = array[2];
+		let array = message.channel.name.split('_');
+		let id = array[array.length - 1].toString();
 
 		DB.get(eval(`-${id}`)).then(user => {
 			let object = user;

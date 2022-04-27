@@ -3,7 +3,7 @@ const Database = require("@replit/database");
 const DB = new Database();
 let prefix = process.env.PREFIX;
 
-let mod_role = '826626486127165540'
+let mod_role = '968661349565612076'
 
 module.exports = {
 	name: "modmail",
@@ -29,9 +29,9 @@ module.exports = {
 		}).then(reply => {
 			reply = reply.first();
 
-			let server = client.guilds.cache.get('826624049999249491');
+			let server = client.guilds.cache.get('583063339131863040');
 
-			client.guilds.cache.get('826624049999249491').channels.create(`TK-${message.author.username}-${message.author.id}`, {
+			client.guilds.cache.get('583063339131863040').channels.create(`TK-${message.author.username}_${message.author.id}`, {
 				type: 'GUILD_TEXT',
 				permissionOverwrites: [
 					{

@@ -3,15 +3,15 @@ const DB = new Database();
 let prefix = process.env.PREFIX;
 
 module.exports = {
-	name: "test",
-	description: "",
-	usage: "",
-	admin: true, 
+	name: "close_ticket",
+	description: "Closes the ticket the command is used inside of.",
+	usage: `${prefix}close_ticket (*TO BE USED INSIDE OF TICKET CHANNELS ONLY*)`,
+	mod: true,
 
 	execute(client, message, args, Discord) {
-		let user = message.mentions.members.first();
-		let id = user.id;
-		
+		let array = message.channel.name.split('_');
+		let id = array[array.length - 1].toString();
+
 		DB.get(eval(`-${id}`)).then(user => {
 			let object = user;
 			object.ticket = false;
@@ -20,6 +20,5 @@ module.exports = {
 				client.users.cache.get(id).send('ticket closed, thank you for contacting us!');
 			});
 		});
-		//message.channel.send(message.mentions.members.first().username);
 	}
 }

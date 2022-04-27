@@ -98,7 +98,7 @@ module.exports = (Discord, client, message) => {
 				}
 				else if (user.ticket == true) {
 					//console.log(`tk-${message.author.username}-${message.author.id}`)
-					let channel = client.channels.cache.find(channel => channel.name === `tk-${message.author.username.toLowerCase()}-${message.author.id}`);
+					let channel = client.channels.cache.find(channel => channel.name === `tk-${message.author.username.toLowerCase()}_${message.author.id}`);
 					try{
 						channel.send(`>${message}`);
 					}catch(err) {console.log(err)}
@@ -129,6 +129,10 @@ module.exports = (Discord, client, message) => {
 		if ((command.admin && !message.member.hasPermission('ADMINISTRATOR') && message.author.id != 510193628245786656)) {
 			//let mod_role = message.guild.roles.cache.find((r) => r.name === "Starcop (Mod)");
 			return message.channel.send(`You don't have permission to use this command, ${message.author}!`);
+		}
+
+		if(command.mod && !message.member._roles.includes('712531393787199539')){
+			
 		}
 	}
 
