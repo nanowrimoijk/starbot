@@ -1,9 +1,3 @@
 -ban, kick, warn commands
--ban, kick, warn commands auto create a report entry 
 -user watch list (mod eyes only)
--ticket system <WIP>
 -old level roles deleted when given a new one
--mod help command
--admin help command
--closeTicket command
--

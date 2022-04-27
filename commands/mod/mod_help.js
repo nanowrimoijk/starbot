@@ -9,12 +9,12 @@ module.exports = {
 	execute(client, message, args, Discord) {
 		let embed = new Discord.MessageEmbed()
 			.setColor('#00')
-			.setTitle("Help")
+			.setTitle("Mod Help")
 			.setTimestamp()
 		;
 
 		client.commands.forEach(function(command) {
-			if(!command.admin ){
+			if(command.mod){
 				embed.addField(`${command.name}`, `${command.usage} => ${command.description}`);
 			}
 		});
