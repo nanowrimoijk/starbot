@@ -10,7 +10,6 @@ module.exports = {
 
 	execute(client, message, args, Discord) {
 		let array = message.channel.name.split('_');
-		console.log(array[array.length - 1])
 		let id = array[array.length - 1].toString();
 
 		try {

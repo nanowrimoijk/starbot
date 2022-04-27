@@ -1,14 +1,15 @@
 let prefix = process.env.PREFIX;
 
 module.exports = {
-	name: "help",
-	description: "Lists the usable commands and what they do.",
+	name: "mod_help",
+	description: "Lists the usable mod commands and what they do.",
 	usage: `${prefix}help`,
+	mod: true, 
 
 	execute(client, message, args, Discord) {
 		let embed = new Discord.MessageEmbed()
 			.setColor('#00')
-			.setTitle("Leaderboard")
+			.setTitle("Help")
 			.setTimestamp()
 		;
 
