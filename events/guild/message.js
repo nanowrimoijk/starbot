@@ -61,7 +61,7 @@ module.exports = (Discord, client, message) => {
 					if (possible_role && !message.member._roles.includes(possible_role.id)) {
 						message.member.roles.add(possible_role);
 						//client.channels.cache.get('933531708165345393').send(`${message.author} has been given the role "${possible_role.name}"`);
-						client.users.cache.get('510193628245786656').send(`${message.author.username}#${message.author.discriminator}, ${possible_role.name}, ${message.url}`);
+						//client.users.cache.get('510193628245786656').send(`${message.author.username}#${message.author.discriminator}, ${possible_role.name}, ${message.url}`);
 					}
 
 					DB.set(eval(`-${message.author.id}`), new_user).then(() => {
