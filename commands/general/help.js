@@ -8,7 +8,7 @@ module.exports = {
 	execute(client, message, args, Discord) {
 		let embed = new Discord.MessageEmbed()
 			.setColor('#00')
-			.setTitle("Leaderboard")
+			.setTitle("Help")
 			.setTimestamp()
 		;
 
