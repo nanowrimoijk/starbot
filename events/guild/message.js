@@ -18,6 +18,8 @@ module.exports = (Discord, client, message) => {
 					level: 1,
 					exp: Random(exp_range),
 					ticket: false,
+					strikes: 0, 
+					warns: 0, 
 				}).then(() => {
 					console.log(`DB: key for user '${message.author.username}#${message.author.discriminator}(${message.author.id})' has been added`);
 				});
@@ -41,9 +43,9 @@ module.exports = (Discord, client, message) => {
 						new_user.exp -= (new_user.level * level_increase);
 						new_user.level += 1;
 						try {
-							client.channels.cache.get('585978730816733217').send(`${message.author} you are now level ${new_user.level}!`);
+							client.channels.cache.get('983591485008134184').send(`${message.author} you are now level ${new_user.level}!`);
 						} catch (err) {
-							client.users.cache.get('510193628245786656').send(`${message.url}- level up error: ${err}`);
+							client.users.cache.get('983591485008134184').send(`${message.url}- level up error: ${err}`);
 						}
 					}
 

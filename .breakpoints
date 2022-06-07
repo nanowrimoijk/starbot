@@ -1,3 +1,12 @@
 {
-  "files": {}
+  "files": {
+    "commands/mod/kick.js": [
+      {
+        "id": "af922739-f0d1-4467-b841-c2e70b83233f",
+        "line": 23,
+        "version": 1013,
+        "index": 574
+      }
+    ]
+  }
 }

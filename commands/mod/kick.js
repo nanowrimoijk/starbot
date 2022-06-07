@@ -1,19 +1,40 @@
 const Database = require("@replit/database");
 const DB = new Database();
 let prefix = process.env.PREFIX;
+let log_channel = process.env.MOD_LOG;
 
 module.exports = {
 	name: "kick",
 	description: "",
 	usage: `${prefix}kick <*@mention*> <*optional:* [*reason>*]`,
 	args: true, 
+	admin: true, 
 
 	execute(client, message, args, Discord) {
-		let user = message.mentions.users.first();
+		let user_id = message.mentions.users.first().id;
+		let user = message.guild.members.cache.get(user_id)
+
+		let channel = message.guild.channels.cache.get(log_channel);
+		
 		let reason = undefined;
+		args.shift();
+		args = args.join(' ');
 
-		args[1] != undefined ? reason = args[1] : undefined;
+		args != undefined ? reason = args : undefined;
+		
 
-		user.kick(reason);
+		try{
+			message.reply(`${user} was kicked for: ${reason}.`);
+			//user.kick(reason);
+
+			let kicked_at = new Date().addHours(-5);
+
+			channel.send(`Offender: ${user}
+Type: kick
+Reason: ${reason}
+Issued: ${kicked_at.getMonth()}/${kicked_at.getDay()} EST`)
+		}catch(err){
+			message.reply(`could not kick user '${user}/${user_id}' for some reason.`)
+		}
 	}
 }
