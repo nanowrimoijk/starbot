@@ -8,7 +8,7 @@ module.exports = {
 	description: "",
 	usage: `${prefix}kick <*@mention*> <*optional:* [*reason>*]`,
 	args: true, 
-	admin: true, 
+	mod: true, 
 
 	execute(client, message, args, Discord) {
 		let user_id = message.mentions.users.first().id;

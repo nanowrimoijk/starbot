@@ -8,7 +8,7 @@ module.exports = {
 	description: "",
 	usage: `${prefix}ban <*@mention*> <*length(in months(will not be exact), or 0 for permanent)*> <*optional:* [*reason>*]`,
 	args: true, 
-	admin: true, 
+	mod: true, 
 
 	execute(client, message, args, Discord) {
 		let user_id = message.mentions.users.first().id;
