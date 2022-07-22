@@ -6,7 +6,7 @@ module.exports = {
 	name: "cancel",
 	description: "Closes the ticket the command is used inside of.",
 	usage: `${prefix}close_ticket (*TO BE USED INSIDE OF TICKET CHANNELS ONLY*)`,
-	mod: true,
+	admin: true,
 
 	execute(client, message, args, Discord) {
 		let array = message.channel.name.split('_');
