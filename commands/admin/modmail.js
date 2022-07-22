@@ -3,7 +3,8 @@ const Database = require("@replit/database");
 const DB = new Database();
 let prefix = process.env.PREFIX;
 
-let mod_role = '968661349565612076'
+let mod_role = '712531393787199539'
+
 
 module.exports = {
 	name: "modmail",
@@ -45,23 +46,27 @@ module.exports = {
 				],
 			}).then(channel => {
 				channel.send(`<@&${mod_role}> ${reply}`);
-			})
+			});
 
 			message.reply('ticket created, please wait for a response before typing more.');
 
-			
 
-	}).catch(error => {
-		message.channel.send('Interaction timed out, please type anything to create a new interaction.');
-		DB.get(eval(`-${message.author.id}`)).then(user => {
-			let object = user;
-			user.ticket = false;
 
-			let key = eval(`-${message.author.id}`);
-			DB.set(key, object).then(() => {
-				//message.channel.send('Interaction timed out, please type anything to create a new interaction.');
+		})
+			.then(collected => {
+				console.log(collected);
+			})
+			.catch(error => {
+				message.channel.send('Interaction timed out.');
+				DB.get(eval(`-${message.author.id}`)).then(user => {
+					let object = user;
+					user.ticket = false;
+
+					let key = eval(`-${message.author.id}`);
+					DB.set(key, object).then(() => {
+						//message.channel.send('Interaction timed out, please type anything to create a new interaction.');
+					});
+				});
 			});
-		});
-	});
-}
+	}
 }

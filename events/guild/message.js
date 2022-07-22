@@ -18,8 +18,8 @@ module.exports = (Discord, client, message) => {
 					level: 1,
 					exp: Random(exp_range),
 					ticket: false,
-					strikes: 0, 
-					warns: 0, 
+					strikes: 0,
+					warns: 0,
 				}).then(() => {
 					console.log(`DB: key for user '${message.author.username}#${message.author.discriminator}(${message.author.id})' has been added`);
 				});
@@ -100,10 +100,21 @@ module.exports = (Discord, client, message) => {
 				}
 				else if (user.ticket == true) {
 					//console.log(`tk-${message.author.username}-${message.author.id}`)
-					let channel = client.channels.cache.find(channel => channel.name === `tk-${message.author.username.toLowerCase()}_${message.author.id}`);
-					try{
-						channel.send(`>${message}`);
-					}catch(err) {console.log(err)}
+					if (message.content != 'cancel') {
+						let channel = client.channels.cache.find(channel => channel.name === `tk-${message.author.username.toLowerCase()}_${message.author.id}`);
+						try {
+							channel.send(`>${message}`);
+						} catch (err) { console.log(err) }
+					}
+					else {
+						DB.get(eval(`-${message.author.id}`)).then(user => {
+							let new_user = user;
+							new_user.ticket = false;
+							DB.set(eval(`-${message.author.id}`), new_user).then(() => {
+								message.reply('ticket creation canceled.');
+							});
+						});
+					}
 				}
 			}
 		});
@@ -133,8 +144,8 @@ module.exports = (Discord, client, message) => {
 			return message.channel.send(`You don't have permission to use this command, ${message.author}!`);
 		}
 
-		if(command.mod && !message.member._roles.includes('712531393787199539')){
-			
+		if (command.mod && !message.member._roles.includes('712531393787199539')) {
+
 		}
 	}
 

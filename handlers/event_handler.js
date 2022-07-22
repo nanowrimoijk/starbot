@@ -17,6 +17,8 @@ module.exports = (client, Discord) => {
     console.log("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
     console.log("Events and Commands Loaded!");
 
+		
+
     // loads client and guild events
 
     //easy editable, but you dont really need to mess with this one as much

@@ -11,8 +11,8 @@ module.exports = {
 	admin: true, 
 
 	execute(client, message, args, Discord) {
-		let user = message.mentions.users.first();
-		let user_id = message.guild.members.cache.get(user.id)
+		let user_id = message.mentions.users.first().id;
+		let user = message.guild.members.cache.get(user_id)
 		let length = args[1];
 
 		let channel = message.guild.channels.cache.get(log_channel);
@@ -31,18 +31,33 @@ module.exports = {
 		
 
 		try{
-			message.reply(`${user} was banned for: ${reason}.`);
-			//user.ban({reason: reason});
-
+			//message.reply(`${user} was banned for: ${reason}.`);
 			let banned_at = new Date().addHours(-5);
 			let revoked_at = new Date().addHours(24 * 30 * length);
 
+			DB.get('bans').then(bans => {
+				let new_bans = bans;
+				let u = {
+					id: user.id, 
+					reason: reason, 
+					issued: banned_at, 
+					revoked: revoked_at
+				}
+				new_bans.push(u);
+				DB.set('bans', new_bans).then(() => {
+					console.log(`banned ${user}`);
+				});
+			});
+			
+
 			channel.send(`Offender: ${user}
-Type: ban
+Type: Ban
 Reason: ${reason}
-Issued: ${banned_at.getMonth()}/${banned_at.getDay()} EST
-Minimum Revocation Date: ${length > 0 ? revoked_at.getMonth(): 'N/A'}${length > 0 ? '/' : ''}${length > 0 ? revoked_at.getDay(): ''}
-Status: active`)
+Issued: ${banned_at.getMonth()}/${banned_at.getDay()} (EST)
+Minimum Revocation Date: ${length > 0 ? revoked_at.getMonth(): 'N/A'}${length > 0 ? '/' : ''}${length > 0 ? revoked_at.getDay(): ''} (EST)
+Status: active`);
+
+			user.ban({reason: reason});
 		}catch(err){
 			message.reply(`could not ban user '${user}/${user.id}' for some reason.`);
 			console.log(err);

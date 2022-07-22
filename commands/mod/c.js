@@ -4,7 +4,7 @@ let prefix = process.env.PREFIX;
 
 module.exports = {
 	name: "c",
-	description: "Used when talking in tickets.",
+	description: "Used in order to talk in tickets.",
 	usage: `${prefix}c <*message*>`,
 	mod: true,
 
