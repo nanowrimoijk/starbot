@@ -34,6 +34,7 @@ Type: kick
 Reason: ${reason}
 Issued: ${kicked_at.getMonth()}/${kicked_at.getDay()} EST`);
 		}catch(err){
+			comsole.log(err);
 			message.reply(`could not kick user '${user}/${user_id}' for some reason.`)
 		}
 	}

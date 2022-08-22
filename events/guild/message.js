@@ -1,3 +1,4 @@
+
 const Database = require("@replit/database");
 const DB = new Database();
 
@@ -139,7 +140,7 @@ module.exports = (Discord, client, message) => {
 	if (!command) return;
 
 	if (message.guild != null) {
-		if ((command.admin && !message.member.hasPermission('ADMINISTRATOR') && message.author.id != 510193628245786656)) {
+		if ((command.admin && !message.member.hasPermission('ADMINISTRATOR') && message.author.id != process.env.ADMIN)) {
 			//let mod_role = message.guild.roles.cache.find((r) => r.name === "Starcop (Mod)");
 			return message.channel.send(`You don't have permission to use this command, ${message.author}!`);
 		}
