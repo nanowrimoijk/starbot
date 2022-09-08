@@ -3,7 +3,9 @@ const Discord = require('discord.js');
 const fs = require('fs');
 require('dotenv').config();
 
-const client = new Discord.Client();
+const intents = [1, 2, 4, 8, 512, 4096, 32768]
+
+const client = new Discord.Client({intents: intents});
 // Requires the essentials and creates client. Client is what the bot runs off of.
 
 console.log("                     -= BOT STARTING =-");

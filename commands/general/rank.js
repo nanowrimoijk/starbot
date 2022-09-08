@@ -28,7 +28,8 @@ module.exports = {
 				.addField(`level: ${user.level}`, "\u200b")
 				.addField(`exp: ${user.exp}/${user.level * 100}`, "\u200b")
 
-			message.channel.send(exampleEmbed);
+			//message.channel.send(exampleEmbed);
+			message.channel.send({embeds: [exampleEmbed]}).catch(console.error)
 		});
 	}
 }

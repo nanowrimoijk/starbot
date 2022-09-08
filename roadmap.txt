@@ -1,3 +1,0 @@
--ban, kick, warn, strike commands
--old level roles deleted when given a new one
--music???

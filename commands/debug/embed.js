@@ -3,7 +3,7 @@ const DB = new Database();
 let prefix = process.env.PREFIX;
 
 module.exports = {
-	name: "",
+	name: "embed",
 	description: "",
 	usage: "",
 
@@ -15,6 +15,7 @@ module.exports = {
 			.addField('search <tag>', 'Search the database for items tagged with <tag>')
 			.setTimestamp()
 
-		message.channel.send(exampleEmbed);
+		//message.channel.send(exampleEmbed);
+		message.channel.send({embeds: [exampleEmbed]}).catch(console.error)
 	}
 }

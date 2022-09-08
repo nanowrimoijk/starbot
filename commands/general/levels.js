@@ -69,7 +69,8 @@ module.exports = {
 						array = array.join('');
 						let embed = eval(array);
 
-						message.channel.send(embed);
+						//message.channel.send(embed);
+						message.channel.send({embeds: [embed]}).catch(console.error)
 					}
 				});
 			});
