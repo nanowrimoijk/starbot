@@ -1,5 +1,5 @@
 {
-  "name": "DiscordJS-Bot-Template-V3",
+  "name": "nodejs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@replit/database": "^2.0.1",
-    "discord.js": "^12.5.3",
-    "dotenv": "^10.0.0",
-    "fs": "0.0.1-security"
+    "@types/node": "^18.0.6",
+    "node-fetch": "^3.2.6"
   }
 }
