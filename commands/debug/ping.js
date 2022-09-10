@@ -11,6 +11,8 @@ module.exports = {
 
 			message.channel.send(`Bot Latency: ${ping}ms, API Latency: ${client.ws.ping}ms`);
 		});
+
+		console.log(Discord)
 	},
 };
 

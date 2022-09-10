@@ -9,7 +9,11 @@ module.exports = {
 	description: "Shows the global leaderboard.",
 	usage: `${prefix}levels <*optional*: [*page number*]>`,
 
-	execute(client, message, args, Discord) {
+	async execute(client, message, args, Discord) {
+
+		let first_message = await message.channel.send('please wait...');
+
+		
 		DB.list("-").then(keys => {
 			let playerList = [];
 			let total = keys.length;
@@ -69,8 +73,13 @@ module.exports = {
 						array = array.join('');
 						let embed = eval(array);
 
+						let index = playerList.map(e => e.name).indexOf(message.author.username);
+						//console.log(index + 1);
+						embed.setFooter({ text: `${message.author.username}, you are rank ${index + 1}`});
+
 						//message.channel.send(embed);
-						message.channel.send({embeds: [embed]}).catch(console.error)
+						//message.channel.send({embeds: [embed]}).catch(console.error)
+						first_message.edit({content: '_ _', embeds: [embed]}).catch(console.error);
 					}
 				});
 			});
@@ -84,10 +93,11 @@ function get_total_exp(object){
 	let exp = object.exp;
 	let total = 0;
 
-	total += exp;
+	total += parseInt(exp);
 	for(let i = level - 1; i > 0; i--){
 		total += i * 100;
 	}
 
+	//console.log(total);
 	return total;
 }
