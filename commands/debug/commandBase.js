@@ -5,7 +5,7 @@ let prefix = process.env.PREFIX;
 module.exports = {
 	name: "",
 	description: "",
-	usage: ``,
+	usage: `${prefix}`,
 
 	execute(client, message, args, Discord) {
 		//
