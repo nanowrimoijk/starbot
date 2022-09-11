@@ -26,7 +26,7 @@ module.exports = {
 	    ]);
 		}
 
-		message.channel.send(result);
+		message.channel.send(result.join("\n"));
 
 		
 	}

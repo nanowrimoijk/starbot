@@ -42,11 +42,11 @@ module.exports = (Discord, client, message) => {
 					if (new_user.exp >= (new_user.level * level_increase)) {
 						console.log(new_user);
 						new_user.exp -= (new_user.level * level_increase);
-						new_user.level += 1;
+						parseInt(new_user.level) += 1;
 						try {
-							//client.channels.cache.get('983591485008134184').send(`${message.author} you are now level ${new_user.level}!`);
+							client.channels.cache.get('983591485008134184').send(`${message.author} you are now level ${new_user.level}!`);
 						} catch (err) {
-							//client.users.cache.get('983591485008134184').send(`${message.url}- level up error: ${err}`);
+							client.users.cache.get('843262807100751902').send(`${message.url}- level up error: ${err}`);
 						}
 					}
 
@@ -140,7 +140,7 @@ module.exports = (Discord, client, message) => {
 	if (!command) return;
 
 	if (message.guild != null) {
-		if ((command.admin && !message.member.hasPermission('ADMINISTRATOR') && message.author.id != process.env.ADMIN)) {
+		if ((command.admin && message.author.id != process.env.ADMIN)) {
 			//let mod_role = message.guild.roles.cache.find((r) => r.name === "Starcop (Mod)");
 			return message.channel.send(`You don't have permission to use this command, ${message.author}!`);
 		}
