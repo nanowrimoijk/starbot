@@ -76,6 +76,11 @@ module.exports = (Discord, client, message) => {
 		});
 	}
 
+
+  if(message.mentions.users.has(client.user.id) && message.content.includes('girlfriend')){
+		message.channel.send('<@710851827066732555> my beloved');//710851827066732555
+	}
+
 	const prefix = process.env.PREFIX;
 	if ((!message.content.startsWith(prefix) && message.guild != null) || message.author.bot) return;
 
