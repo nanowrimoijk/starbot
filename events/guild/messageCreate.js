@@ -42,7 +42,7 @@ module.exports = (Discord, client, message) => {
 					if (new_user.exp >= (new_user.level * level_increase)) {
 						console.log(new_user);
 						new_user.exp -= (new_user.level * level_increase);
-						parseInt(new_user.level) += 1;
+						new_user.level = parseInt(new_user.level) + 1;
 						try {
 							client.channels.cache.get('983591485008134184').send(`${message.author} you are now level ${new_user.level}!`);
 						} catch (err) {
