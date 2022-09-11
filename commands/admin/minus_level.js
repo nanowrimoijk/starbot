@@ -18,7 +18,7 @@ module.exports = {
 				new_user = {
 					name: user.name,
 					last_exp: user.last_exp,
-					level: user.level + parseInt(args[1]),
+					level: parseInt(args[1]),
 					exp: user.exp,
 				}
 				console.log(new_user.level);
