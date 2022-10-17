@@ -6,6 +6,7 @@ module.exports = {
 	name: "embed",
 	description: "",
 	usage: "",
+  admin: true, 
 
 	execute(client, message, args, Discord) {
 		const exampleEmbed = new Discord.MessageEmbed()
