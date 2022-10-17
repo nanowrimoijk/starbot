@@ -6,6 +6,7 @@ module.exports = {
 	name: "",
 	description: "",
 	usage: `${prefix}`,
+  admin: true, 
 
 	execute(client, message, args, Discord) {
 		//
